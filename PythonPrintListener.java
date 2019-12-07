@@ -1,7 +1,7 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
-public class MiniCPrintListener extends MiniCBaseListener {
+public class PythonPrintListener extends MiniCBaseListener {
 
 	private ParseTreeProperty<String> nextTexts = new ParseTreeProperty<String>();
 
