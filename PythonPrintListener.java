@@ -149,11 +149,12 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		}
 	}
 
+	// if 문 뒤에 : 추가
 	@Override
 	public void exitIf_stmt(MiniCParser.If_stmtContext ctx) {
 		String e1, s1;
 		e1 = ctx.getChild(0).getText() + " " + ctx.getChild(1).getText() + nextTexts.get(ctx.expr())
-				+ ctx.getChild(3).getText() + "\n";
+				+ ctx.getChild(3).getText() + ":"+ "\n";
 		s1 = nextTexts.get(ctx.stmt(0));
 
 		String[] indentedStmt;
