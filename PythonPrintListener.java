@@ -13,13 +13,13 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	@Override
 	public void exitVar_decl(MiniCParser.Var_declContext ctx) {
 		String str;
-		if (ctx.getChildCount() == 6 && ctx.getChild(3).getText().equals("["))// array�ϰ��
+		if (ctx.getChildCount() == 6 && ctx.getChild(3).getText().equals("["))// array일경우
 			str = ctx.IDENT().getText() + ctx.getChild(3).getText()
 					+ ctx.LITERAL().getText() + ctx.getChild(5).getText() + ctx.getChild(5).getText() + "\n";
-		else if (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("="))// =�ϰ��
+		else if (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("="))// =일경우
 			str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
 					+ ctx.LITERAL().getText() + ctx.getChild(4).getText() + "\n";
-		else// �ƴҰ��
+		else// 아닐경우
 			str = ctx.IDENT().getText() + ctx.getChild(2).getText() + "\n";
 
 		nextTexts.put(ctx, str);
@@ -32,12 +32,12 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		s1 = nextTexts.get(ctx.decl(index++)) + "\n";
 		s2 = s2 + s1;
 
-		while (ctx.getChildCount() > index && ctx.getChild(index) == ctx.decl(index)) { // �� ������� �ݺ�
+		while (ctx.getChildCount() > index && ctx.getChild(index) == ctx.decl(index)) { //
 			s1 = nextTexts.get(ctx.decl(index++)) + "\n";
 			s2 = s2 + s1;
 		}
 		nextTexts.put(ctx, s2);
-		System.out.println(s2); // ���������� ����ϱ�
+		System.out.println(s2); // 마지막으로 출력하기
 
 	}
 
@@ -259,7 +259,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	private boolean isBinaryOperation(MiniCParser.ExprContext ctx) {
 		return (ctx.getChildCount() == 3) && (ctx.getChild(1) != ctx.expr()) && (ctx.expr(0) != null)
 				&& (ctx.expr(1) != null);
-		// ������ �Ұ�� i=2<<�̷��� �ȵ�
+		// 교재대로 할경우 i=2<<이런거 안됨
 	}
 
 	private boolean isArray(MiniCParser.ExprContext ctx) {
