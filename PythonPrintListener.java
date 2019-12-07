@@ -28,7 +28,7 @@ public class PythonPrintListener extends MiniCBaseListener {
       //System.out.println(ctx.getChild(4).getText());
       
       }
-      else {// 아닐경우 
+      else {// 전역 배열을 초기화시킬 때 
     	 // System.out.println(ctx.getText()+ctx.getChildCount());
          //str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4)+"\n";
          str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2);
