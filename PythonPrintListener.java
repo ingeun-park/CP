@@ -10,28 +10,33 @@ public class PythonPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0)));
 	}
 /////////nextTexts.get(ctx.type_spec()) + " " + 삭제 (type 삭제)
-	///// 전역변수 ; 제거
-	@Override
-	public void exitVar_decl(MiniCParser.Var_declContext ctx) {
-		String str;
-		if (ctx.getChildCount() == 6 && ctx.getChild(3).getText().equals("["))// array일경우
-			str = ctx.IDENT().getText() + ctx.getChild(3).getText()
-					+ ctx.LITERAL().getText() + ctx.getChild(5).getText() + ctx.getChild(5).getText() + "\n";
-		else if  (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("=")) {// =일경우
-			str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
-					+ ctx.LITERAL().getText() + "\n";
-		//System.out.println(ctx.IDENT().getText());
-		//System.out.println(ctx.getChild(2).getText());
-		//System.out.println(ctx.getChild(4).getText());
-		
-		}
-		else {// 아닐경우 
-			str = ctx.IDENT().getText() + ctx.getChild(2).getText() + "\n";
-			System.out.println(ctx.getChild(2).getText());
-	}
+   ///// 전역변수 ; 제거
+   @Override
+   public void exitVar_decl(MiniCParser.Var_declContext ctx) {
+      String str;
+      if (ctx.getChildCount() == 6 && ctx.getChild(2).getText().equals("[")) {// array일경우
+    	  //System.out.println(ctx.getText()+ctx.getChildCount());
+    	  str = ctx.IDENT().getText() + "=" + ctx.getChild(2) + ctx.getChild(4)+"\n";
+      }
+      else if  (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("=")) {// =일경우
+         str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
+               + ctx.LITERAL().getText() + "\n";
+      //System.out.println(ctx.IDENT().getText());
+      //System.out.println(ctx.getChild(2).getText());
+      //System.out.println(ctx.getChild(4).getText());
+      
+      }
+      else {// 아닐경우 
+    	  System.out.println(ctx.getText()+ctx.getChildCount());
+         str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4)+"\n";
+         for(int i =0; i<ctx.getChildCount(); i++) {
+        	 System.out.println(i + " " + ctx.getChild(i).getText());
+         }
+         
+   }
 
-		nextTexts.put(ctx, str);
-	}
+      nextTexts.put(ctx, str);
+   }
 	
 	//funprolog 추가 
 	@Override
