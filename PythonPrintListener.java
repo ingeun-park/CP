@@ -52,11 +52,12 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, str);
 		
 	}
-	//nextTexts.get(ctx.type_spec()) + " " + 삭제 
+	//nextTexts.get(ctx.type_spec()) + " " + 삭제 (type삭제 )
+	// : 추가
 	@Override
 	public void exitFun_decl(MiniCParser.Fun_declContext ctx) {
 		nextTexts.put(ctx, "def " + ctx.IDENT().getText() + "("
-				+ nextTexts.get(ctx.params()) + ")\n" + nextTexts.get(ctx.compound_stmt()));
+				+ nextTexts.get(ctx.params()) + ")" + ":" + "\n" + nextTexts.get(ctx.compound_stmt()));
 	}
 
 	@Override
