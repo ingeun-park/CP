@@ -42,7 +42,14 @@ for_stmt	: FOR '(' local_decl expr ';' expr ')' stmt
 			| FOR '(' expr ';' expr ';' expr ')' stmt	;
 
 
-compound_stmt: '{' local_decl* stmt* local_decl* stmt* '}'   ;
+compound_stmt: 	
+	'{' local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* local_decl* stmt*
+	local_decl* stmt* local_decl* stmt* local_decl* stmt* '}'   ;
 
 local_decl   : type_spec IDENT ';'
       | type_spec IDENT '=' LITERAL ';'   
