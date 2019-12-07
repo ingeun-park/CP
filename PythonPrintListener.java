@@ -132,9 +132,9 @@ public class PythonPrintListener extends MiniCBaseListener {
 			String[] idStmt;
 			String stmt = nextTexts.get(ctx.getChild(i));
 			String newStmt = "", space = "    ";
-			idStmt = stmt.split("\n");
 			if(stmt == null)
 				continue;
+			idStmt = stmt.split("\n");
 			for (String anIndentedStmt : idStmt)
 				newStmt = newStmt + (space + anIndentedStmt + "\n");
 
