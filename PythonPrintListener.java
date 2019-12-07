@@ -153,7 +153,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 		if (ctx.getChildCount() == 3) {
 			//s1 = nextTexts.get(ctx.type_spec());
 //			s2 = ctx.IDENT().getText();
-			nextTexts.put(ctx, "");
+			//nextTexts.put(ctx, "");
 			
 		} else { // 변수 초기화 (ctx.getchildcount() == 5)
 			//s1 = nextTexts.get(ctx.type_spec());
