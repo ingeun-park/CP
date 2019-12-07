@@ -112,8 +112,8 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	}
 
 	@Override
-	public void exitCompound_stmt(MiniCParser.Compound_stmtContext ctx) {
-		String str = "{\n";
+	public void exitCompound_stmt(MiniCParser.Compound_stmtContext ctx) {//함수처리
+		String str = "";
 		int NOstmt = ctx.getChildCount();
 		for (int i = 1; i < NOstmt - 1; i++) {
 
@@ -127,7 +127,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 
 			str = str + newStmt;
 		}
-		str = str + "}\n";
+		str = str + "\n";
 		nextTexts.put(ctx, str);
 	}
 
