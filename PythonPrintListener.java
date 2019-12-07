@@ -30,13 +30,13 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		String s1, s2 = "";
 		int index = 0;
 		s1 = nextTexts.get(ctx.decl(index++)) + "\n";
-		s2 = s2 + s1;
+		s2 += getFunProlog() + s1;
 
 		while (ctx.getChildCount() > index && ctx.getChild(index) == ctx.decl(index)) { //
 			s1 = nextTexts.get(ctx.decl(index++)) + "\n";
 			s2 = s2 + s1;
 		}
-		s2 += getFunProlog();
+		s2 += getFunEplilogue();
 		nextTexts.put(ctx, s2);
 		System.out.println(s2); // 마지막으로 출력하기
 
@@ -304,9 +304,14 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		return (ctx.getChildCount() == 6) && ctx.getChild(1).getText().equals("[");
 	}
 	
+	static String getFunEplilogue(){
+		String epilogue = "if __name__ == \"__main__\":" + "\n" + 				 
+							"    " + "main()" + "\n";
+		return epilogue;
+	}
+	
 	static String getFunProlog(){
-	String prolog = "if __name__ == \"__main__\":" + "\n" + 				 
-		"    " + "main()" + "\n";
+		String prolog = "import numpy as np" + "\n" + "\n";
 		return prolog;
 	}
 }
