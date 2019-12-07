@@ -9,7 +9,6 @@ public class PythonPrintListener extends MiniCBaseListener {
 	public void exitDecl(MiniCParser.DeclContext ctx) {
 		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0)));
 	}
-/////////nextTexts.get(ctx.type_spec()) + " " + 삭제 (type 삭제)
    ///// 전역변수 ; 제거
    @Override
    public void exitVar_decl(MiniCParser.Var_declContext ctx) {
@@ -21,10 +20,6 @@ public class PythonPrintListener extends MiniCBaseListener {
       else if  (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("=")) {// =일경우
          str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
                + ctx.LITERAL().getText() + "\n";
-      //System.out.println(ctx.IDENT().getText());
-      //System.out.println(ctx.getChild(2).getText());
-      //System.out.println(ctx.getChild(4).getText());
-      
       }
       else {// 아닐경우 
     	  System.out.println(ctx.getText()+ctx.getChildCount());
@@ -59,11 +54,6 @@ public class PythonPrintListener extends MiniCBaseListener {
 	@Override
 	public void exitType_spec(MiniCParser.Type_specContext ctx) {
 		String str = "";
-//		if (ctx.getChildCount() == 1 && ctx.VOID() != null) {// void
-//			str = ctx.VOID().getText();
-//		} else {
-//			str = ctx.INT().getText();
-//		}
 		nextTexts.put(ctx, str);
 		
 	}
@@ -79,8 +69,6 @@ public class PythonPrintListener extends MiniCBaseListener {
 	public void exitParams(MiniCParser.ParamsContext ctx) {
 		String str = "";
 		if (ctx.getChildCount() != 0 && !(ctx.getChildCount() == 1 && ctx.VOID() != null)) {
-			//System.out.print(ctx.param().get(ctx.param().size()-1));
-			//System.out.print("\n");
 			for (MiniCParser.ParamContext anCtx : ctx.param()) {
 				//System.out.print(anCtx);
 				String tmp = nextTexts.get(anCtx);
@@ -157,12 +145,10 @@ public class PythonPrintListener extends MiniCBaseListener {
 	   public void exitLocal_decl(MiniCParser.Local_declContext ctx) {
 	      String s2 = null;
  	     if (ctx.getChildCount() == 3) {
-   	      //s1 = nextTexts.get(ctx.type_spec());
-//  	       s2 = ctx.IDENT().getText();
     	     nextTexts.put(ctx, "");
          
    	   } else { // 변수 초기화 (ctx.getchildcount() == 5)
-    	     //s1 = nextTexts.get(ctx.type_spec());
+    	    
      	    if(ctx.getChildCount() == 6){
     	        s2 = ctx.IDENT().getText() + "=" + ctx.getChild(2) + ctx.getChild(4);
             
@@ -172,10 +158,6 @@ public class PythonPrintListener extends MiniCBaseListener {
       	      s2 = ctx.IDENT().getText() + ctx.getChild(2) + ctx.LITERAL().getText(); //+ ctx.getChild(4);
       	   }
        	    else {
-        	// System.out.println("my "+ctx.getText() + ctx.getChildCount());
-        	// for(int i =0; i<ctx.getChildCount();i++) {
-        	// System.out.println(i+" "+ctx.getChild(i).getText());
-        	// }
         	s2 = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4);
          }
            nextTexts.put(ctx, s2 + "\n");
@@ -199,10 +181,10 @@ public class PythonPrintListener extends MiniCBaseListener {
 			for (String anIndentedStmt : indentedStmt)
 				newStmt = newStmt + (anIndentedStmt + "\n");
 		} else {
-			newStmt = newStmt + "{\n";
+			newStmt = newStmt + "\n";
 			for (String anIndentedStmt : indentedStmt)
 				newStmt = newStmt + (indent + anIndentedStmt + "\n");
-			newStmt = newStmt + "}\n";
+			newStmt = newStmt + "\n";
 		}
 		nextTexts.put(ctx.stmt(0), newStmt);
 		nextTexts.put(ctx, e1 + nextTexts.get(ctx.stmt(0)));
@@ -211,14 +193,11 @@ public class PythonPrintListener extends MiniCBaseListener {
 	//return 뒤에 ; 삭제
 	@Override
 	public void exitReturn_stmt(MiniCParser.Return_stmtContext ctx) {
-		//System.out.println(ctx.getChild(2));
-		//System.out.println(ctx.expr().getText());
 		if (ctx.expr() != null)
 			nextTexts.put(ctx, ctx.RETURN().getText() + " " + nextTexts.get(ctx.expr()) + "\n");
 		else {
 			System.out.println(ctx.getChild(1));
 			nextTexts.put(ctx, ctx.RETURN().getText() + "\n");
-			
 		}
 			
 	}
