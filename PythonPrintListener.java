@@ -252,7 +252,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 		else if (isFunction(ctx)) {
 			s1 = ctx.IDENT().getText();
 			s2 = nextTexts.get(ctx.args());
-			if(s1.equals("printf")) // 출력문 
+			if(s1.equals("_print")) // 출력문 c에서 출력을 _print()로 한다고 
 			{
 				s1 = "print";
 			}
