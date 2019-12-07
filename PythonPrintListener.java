@@ -90,7 +90,6 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0)));
 	}
 
-	//while 문 뒤에 : 추가  
 	@Override
 	public void exitWhile_stmt(MiniCParser.While_stmtContext ctx) {
 		String str, newStmt = "", space = "    ";
@@ -109,7 +108,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		}
 
 		nextTexts.put(ctx.stmt(), newStmt);
-		str = ctx.getChild(0) + " " + ctx.getChild(1) + nextTexts.get(ctx.expr()) + ctx.getChild(3) +  ":" + "\n" + newStmt;
+		str = ctx.getChild(0) + " " + ctx.getChild(1) + nextTexts.get(ctx.expr()) + ctx.getChild(3) + "\n" + newStmt;
 		nextTexts.put(ctx, str);
 	}
 
@@ -133,19 +132,19 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, str);
 	}
 
-	// s1 + " " +
+	// type 삭제
+	// ; 세미콜론 삭제 
 	@Override
 	public void exitLocal_decl(MiniCParser.Local_declContext ctx) {
 		String s1 = null, s2 = null;
 		if (ctx.getChildCount() == 3) {
 			//s1 = nextTexts.get(ctx.type_spec());
-			s2 = ctx.IDENT().getText();
-			nextTexts.put(ctx, s2 + ctx.getChild(2) + "\n");
-		} else {
+//			s2 = ctx.IDENT().getText();
+			nextTexts.put(ctx, "");
+			
+		} else { // 변수 초기화 (ctx.getchildcount() == 5)
 			//s1 = nextTexts.get(ctx.type_spec());
-			s2 = ctx.IDENT().getText() + ctx.getChild(2) + ctx.LITERAL().getText() + ctx.getChild(4);
-					//+ ctx.getChild(5);
-			//System.out.println(ctx.getChild(5).getText());
+			s2 = ctx.IDENT().getText() + ctx.getChild(2) + ctx.LITERAL().getText(); //+ ctx.getChild(4);
 			nextTexts.put(ctx, s2 + "\n");
 		}
 	}
@@ -295,4 +294,6 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	private boolean isArrayNExpr(MiniCParser.ExprContext ctx) {
 		return (ctx.getChildCount() == 6) && ctx.getChild(1).getText().equals("[");
 	}
+	
+	//static String getFU
 }
