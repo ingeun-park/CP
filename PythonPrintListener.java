@@ -129,7 +129,44 @@ public class PythonPrintListener extends MiniCBaseListener {
 		str = ctx.getChild(0) + " " + ctx.getChild(1) + nextTexts.get(ctx.expr()) +ctx.getChild(3) + ":" + "\n" + newStmt ;
 		nextTexts.put(ctx, str);
 	}
-
+	///for문
+	//for 변수 in range(min, max):
+	@Override 
+	public void exitFor_stmt(MiniCParser.For_stmtContext ctx) { 
+		String str, newStmt = "", space = "    ";
+		String[] idStmt; // stmt
+	    String stmt = nextTexts.get(ctx.stmt());
+	    idStmt = stmt.split("\n");
+	    
+	    if (ctx.stmt().compound_stmt() != null) {
+	         for (String strI : idStmt)
+	            newStmt = newStmt + (strI + "\n");
+	      } else {
+	         newStmt = newStmt + ("{\n");
+	         for (String strI : idStmt)
+	            newStmt = newStmt + (space + strI + "\n");
+	         newStmt = newStmt + ("}\n");
+	      }
+	    
+	    nextTexts.put(ctx.stmt(), newStmt);
+	    str = ctx.getChild(0).getText();
+	    if (ctx.getChild(2).getChildCount() == 5) // ex) int i = 0;
+	    {
+	    	str += " " + ctx.getChild(2).getChild(1).getText() + " in " + "range" 
+	    			+ "(" + ctx.getChild(2).getChild(3).getText() + "," 
+	    			+ ctx.getChild(3).getChild(2).getText() + ")";
+	    }
+	    else //ex) i = 0; 
+	    {
+	    	str += " " + ctx.expr(0).getChild(0).getText() + " in " + "range"
+	    			+ "(" + ctx.expr(0).getChild(2).getText() + "," 
+	    			+ ctx.expr(1).getChild(2).getText() + ")";
+	    }
+	    str += ":" + "\n" + newStmt;
+		//System.out.println(ctx.expr(0).getText());
+		nextTexts.put(ctx, str);
+		
+	}
 	@Override
 	public void exitCompound_stmt(MiniCParser.Compound_stmtContext ctx) {//함수처리
 		String str = "";
