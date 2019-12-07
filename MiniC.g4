@@ -11,7 +11,8 @@ decl      : var_decl
       
 var_decl   :  type_spec IDENT ';' 
       | type_spec IDENT '=' LITERAL ';'   
-      | type_spec IDENT '[' LITERAL ']' ';'   ;
+      | type_spec IDENT '[' LITERAL ']' ';'
+      | type_spec IDENT '[' LITERAL ']' '=' '{' args '}' ';'	;
       
 type_spec   : VOID            
       | INT            ;
