@@ -107,6 +107,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 	}
 
 	//while 문 뒤에 : 추가
+	//while 문 괄호 삭제
 	@Override
 	public void exitWhile_stmt(MiniCParser.While_stmtContext ctx) {
 		String str, newStmt = "", space = "    ";
@@ -118,10 +119,10 @@ public class PythonPrintListener extends MiniCBaseListener {
 			for (String strI : idStmt)
 				newStmt = newStmt + (strI + "\n");
 		} else {
-			newStmt = newStmt + ("{\n");
+			newStmt = newStmt + ("\n");
 			for (String strI : idStmt)
 				newStmt = newStmt + (space + strI + "\n");
-			newStmt = newStmt + ("}\n");
+			newStmt = newStmt + ("\n");
 		}
 
 		nextTexts.put(ctx.stmt(), newStmt);
