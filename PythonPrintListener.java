@@ -175,12 +175,19 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, e1 + nextTexts.get(ctx.stmt(0)));
 	}
 
+	//return 뒤에 ; 삭제
 	@Override
 	public void exitReturn_stmt(MiniCParser.Return_stmtContext ctx) {
+		//System.out.println(ctx.getChild(2));
+		System.out.println(ctx.expr().getText());
 		if (ctx.expr() != null)
-			nextTexts.put(ctx, ctx.RETURN().getText() + " " + nextTexts.get(ctx.expr()) + ctx.getChild(2) + "\n");
-		else
-			nextTexts.put(ctx, ctx.RETURN().getText() + ctx.getChild(1) + "\n");
+			nextTexts.put(ctx, ctx.RETURN().getText() + " " + nextTexts.get(ctx.expr()) + "\n");
+		else {
+			System.out.println(ctx.getChild(1));
+			nextTexts.put(ctx, ctx.RETURN().getText() + "\n");
+			
+		}
+			
 	}
 
 	@Override
