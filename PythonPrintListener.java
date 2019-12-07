@@ -145,6 +145,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 
 	// type 삭제
 	// ; 세미콜론 삭제 
+	// 배열 선언 
 	@Override
 	public void exitLocal_decl(MiniCParser.Local_declContext ctx) {
 		String s1 = null, s2 = null;
@@ -156,6 +157,9 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		} else { // 변수 초기화 (ctx.getchildcount() == 5)
 			//s1 = nextTexts.get(ctx.type_spec());
 			s2 = ctx.IDENT().getText() + ctx.getChild(2) + ctx.LITERAL().getText(); //+ ctx.getChild(4);
+			if(ctx.getChildCount() == 6){
+				s2 += ctx.getChild(4);
+			}
 			nextTexts.put(ctx, s2 + "\n");
 		}
 	}
