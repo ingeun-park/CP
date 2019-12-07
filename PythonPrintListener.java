@@ -180,7 +180,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	@Override
 	public void exitReturn_stmt(MiniCParser.Return_stmtContext ctx) {
 		//System.out.println(ctx.getChild(2));
-		System.out.println(ctx.expr().getText());
+		//System.out.println(ctx.expr().getText());
 		if (ctx.expr() != null)
 			nextTexts.put(ctx, ctx.RETURN().getText() + " " + nextTexts.get(ctx.expr()) + "\n");
 		else {
