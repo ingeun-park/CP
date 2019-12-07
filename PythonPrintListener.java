@@ -289,13 +289,13 @@ public class PythonPrintListener extends MiniCBaseListener {
 		else if (isArray(ctx)) {
 			s1 = ctx.IDENT().getText();
 			s2 = nextTexts.get(ctx.expr(0));
-			nextTexts.put(ctx, s1 + " " + ctx.getChild(1) + s2 + ctx.getChild(3));
+			nextTexts.put(ctx, s1 + ctx.getChild(1) + s2 + ctx.getChild(3));
 		}
 
 		else if (isArrayNExpr(ctx)) {
 			s1 = ctx.IDENT().getText() + ctx.getChild(1) + nextTexts.get(ctx.expr(0)) + ctx.getChild(3);
 			s2 = nextTexts.get(ctx.expr(1));
-			nextTexts.put(ctx, s1 + " " + ctx.getChild(4) + " " + s2);
+			nextTexts.put(ctx, s1 + ctx.getChild(4) + s2);
 		}
 
 	}
