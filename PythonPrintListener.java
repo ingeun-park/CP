@@ -24,7 +24,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 
 		nextTexts.put(ctx, str);
 	}
-
+	//funprolog 추가 
 	@Override
 	public void exitProgram(MiniCParser.ProgramContext ctx) {
 		String s1, s2 = "";
@@ -36,6 +36,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 			s1 = nextTexts.get(ctx.decl(index++)) + "\n";
 			s2 = s2 + s1;
 		}
+		s2 += getFunProlog();
 		nextTexts.put(ctx, s2);
 		System.out.println(s2); // 마지막으로 출력하기
 
@@ -303,5 +304,9 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		return (ctx.getChildCount() == 6) && ctx.getChild(1).getText().equals("[");
 	}
 	
-	//static String getFU
+	static String getFunProlog(){
+	String prolog = "if __name__ == \"__main__\":" + "\n" + 				 
+		"    " + "main()" + "\n";
+		return prolog;
+	}
 }
