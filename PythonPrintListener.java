@@ -63,8 +63,15 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	public void exitParams(MiniCParser.ParamsContext ctx) {
 		String str = "";
 		if (ctx.getChildCount() != 0 && !(ctx.getChildCount() == 1 && ctx.VOID() != null)) {
+			System.out.print(ctx.param().get(ctx.param().size()-1));
+			System.out.print("\n");
 			for (MiniCParser.ParamContext anCtx : ctx.param()) {
-				str = str + nextTexts.get(anCtx) + ", ";
+				System.out.print(anCtx);
+				String tmp = nextTexts.get(anCtx);
+				str += tmp; 
+				if(anCtx != ctx.param().get(ctx.param().size()-1)) {
+					str += ",";
+				}
 			}
 		}
 		nextTexts.put(ctx, str);
