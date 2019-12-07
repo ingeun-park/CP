@@ -91,6 +91,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0)));
 	}
 
+	//while 문 뒤에 : 추가
 	@Override
 	public void exitWhile_stmt(MiniCParser.While_stmtContext ctx) {
 		String str, newStmt = "", space = "    ";
@@ -109,7 +110,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		}
 
 		nextTexts.put(ctx.stmt(), newStmt);
-		str = ctx.getChild(0) + " " + ctx.getChild(1) + nextTexts.get(ctx.expr()) + ctx.getChild(3) + "\n" + newStmt;
+		str = ctx.getChild(0) + " " + ctx.getChild(1) + nextTexts.get(ctx.expr()) +ctx.getChild(3) + ":" + "\n" + newStmt ;
 		nextTexts.put(ctx, str);
 	}
 
