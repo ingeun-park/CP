@@ -1,2 +1,2 @@
 # CP
-CP TERM
+CP TeamProject
