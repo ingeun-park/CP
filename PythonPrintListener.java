@@ -191,10 +191,10 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		}
 			
 	}
-
+	//; 삭제 
 	@Override
 	public void exitExpr_stmt(MiniCParser.Expr_stmtContext ctx) {
-		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0)) + ctx.getChild(1).getText() + "\n");
+		nextTexts.put(ctx, nextTexts.get(ctx.getChild(0))  + "\n");
 	}
 
 	@Override
