@@ -219,7 +219,7 @@ public class MiniCPrintListener extends MiniCBaseListener {
 	@Override
 	public void exitEveryRule(ParserRuleContext ctx) {
 	}
-
+	//////출력문 추가 ==> int만 고려
 	@Override
 	public void exitExpr(MiniCParser.ExprContext ctx) {
 		String s1 = null, s2 = null, op = null;
@@ -248,6 +248,10 @@ public class MiniCPrintListener extends MiniCBaseListener {
 		else if (isFunction(ctx)) {
 			s1 = ctx.IDENT().getText();
 			s2 = nextTexts.get(ctx.args());
+			if(s1.equals("printf")) // 출력문 
+			{
+				s1 = "print";
+			}
 			nextTexts.put(ctx, s1 + ctx.getChild(1) + s2 + ctx.getChild(3));
 		}
 
