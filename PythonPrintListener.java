@@ -133,7 +133,8 @@ public class PythonPrintListener extends MiniCBaseListener {
 			String stmt = nextTexts.get(ctx.getChild(i));
 			String newStmt = "", space = "    ";
 			idStmt = stmt.split("\n");
-
+			if(stmt == null)
+				continue;
 			for (String anIndentedStmt : idStmt)
 				newStmt = newStmt + (space + anIndentedStmt + "\n");
 
@@ -152,7 +153,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 		if (ctx.getChildCount() == 3) {
 			//s1 = nextTexts.get(ctx.type_spec());
 //			s2 = ctx.IDENT().getText();
-			nextTexts.put(ctx, "");
+			//nextTexts.put(ctx, "");
 			
 		} else { // 변수 초기화 (ctx.getchildcount() == 5)
 			//s1 = nextTexts.get(ctx.type_spec());
