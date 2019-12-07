@@ -146,7 +146,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 	   public void exitLocal_decl(MiniCParser.Local_declContext ctx) {
 	      String s2 = null;
  	     if (ctx.getChildCount() == 3) {
-    	     nextTexts.put(ctx, "");
+    	    // nextTexts.put(ctx, "");
          
    	   } else { // 변수 초기화 (ctx.getchildcount() == 5)
     	    
