@@ -153,19 +153,29 @@ public class PythonPrintListener extends MiniCBaseListener {
 	    if (ctx.getChild(2).getChildCount() == 5) // ex) int i = 0;
 	    {
 	    	str += " " + ctx.getChild(2).getChild(1).getText() + " in " + "range" 
-	    			+ "(" + ctx.getChild(2).getChild(3).getText() + "," 
-	    			+ ctx.getChild(3).getChild(2).getText() + ")";
+	    			+ "(" + ctx.getChild(2).getChild(3).getText() + "," ;
+	    			//+ ctx.getChild(3).getChild(2).getText() + ")";
 	    }
 	    else //ex) i = 0; 
 	    {
 	    	str += " " + ctx.expr(0).getChild(0).getText() + " in " + "range"
-	    			+ "(" + ctx.expr(0).getChild(2).getText() + "," 
-	    			+ ctx.expr(1).getChild(2).getText() + ")";
+	    			+ "(" + ctx.expr(0).getChild(2).getText() + "," ;
+	    			//+ ctx.expr(1).getChild(2).getText() + ")";
+	    }
+	    
+	    if (ctx.getChild(3).getChild(1).getText().equals("<="))
+	    {
+	    	//if(ctx.getChild(3).getChild(2). )
+	    	//int n = Integer.parseInt(ctx.getChild(3).getChild(2).getText()) + 1;
+	    	str += ctx.getChild(3).getChild(2).getText() + "+1" + ")";
+	    }
+	    else
+	    {
+	    	str += ctx.getChild(3).getChild(2).getText() + ")";
 	    }
 	    str += ":" + "\n" + newStmt;
 		//System.out.println(ctx.expr(0).getText());
 		nextTexts.put(ctx, str);
-		
 	}
 	@Override
 	public void exitCompound_stmt(MiniCParser.Compound_stmtContext ctx) {//함수처리
