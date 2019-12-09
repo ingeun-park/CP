@@ -317,12 +317,16 @@ public class PythonPrintListener extends MiniCBaseListener {
 			nextTexts.put(ctx, s1 + ctx.getChild(1) + s2 + ctx.getChild(3));
 		}
 		// ++i > i = i+1으로 바꿔줌
+		// --i 추가
 		else if (isFrontOp(ctx)) {
 			s1 = nextTexts.get(ctx.expr(0));
 			op = ctx.getChild(0).getText();
 			String tmp;
 			if (op.equals("++")) {
 				tmp = s1 + "=" + s1 + "+1";
+				nextTexts.put(ctx, tmp);
+			} else if (op.equals("--")) {
+				tmp = s1 + "=" + s1 + "-1";
 				nextTexts.put(ctx, tmp);
 			} else
 				nextTexts.put(ctx, op + s1);
