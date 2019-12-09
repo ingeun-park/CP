@@ -23,23 +23,15 @@ public class PythonPrintListener extends MiniCBaseListener {
       else if  (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("=")) {// =일경우
          str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
                + ctx.LITERAL().getText();
-      //System.out.println(ctx.IDENT().getText());
-      //System.out.println(ctx.getChild(2).getText());
-      //System.out.println(ctx.getChild(4).getText());
-      
       }
       else {// 전역 배열을 초기화시킬 때 
-    	 // System.out.println(ctx.getText()+ctx.getChildCount());
          //str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4)+"\n";
          str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2);
          for(int i = 7; i<ctx.getChildCount()-2; i++) {
         	 str += ctx.getChild(i).getText();
          }
          str += ctx.getChild(4);
-         
-         //for(int i =0; i<ctx.getChildCount(); i++) {
-        //	 System.out.println(i + " " + ctx.getChild(i).getText());
-         //}
+       
          
    }
       str += "\n";
@@ -142,10 +134,10 @@ public class PythonPrintListener extends MiniCBaseListener {
 	         for (String strI : idStmt)
 	            newStmt = newStmt + (strI + "\n");
 	      } else {
-	         newStmt = newStmt + ("{\n");
+	         newStmt = newStmt + ("\n");
 	         for (String strI : idStmt)
 	            newStmt = newStmt + (space + strI + "\n");
-	         newStmt = newStmt + ("}\n");
+	         newStmt = newStmt + ("\n");
 	      }
 	    
 	    nextTexts.put(ctx.stmt(), newStmt);
@@ -354,7 +346,6 @@ public class PythonPrintListener extends MiniCBaseListener {
 	private boolean isBinaryOperation(MiniCParser.ExprContext ctx) {
 		return (ctx.getChildCount() == 3) && (ctx.getChild(1) != ctx.expr()) && (ctx.expr(0) != null)
 				&& (ctx.expr(1) != null);
-		// 교재대로 할경우 i=2<<이런거 안됨
 	}
 
 	private boolean isArray(MiniCParser.ExprContext ctx) {
