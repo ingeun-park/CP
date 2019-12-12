@@ -217,7 +217,7 @@ public class PythonPrintListener extends MiniCBaseListener {
       	   }
 		     else if (ctx.getChildCount() == 8 && ctx.getChild(0).getText().equals("char")) // 문자열
 		{
-			str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(6).getText();
+			s2 = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(6).getText();
 
 		}
        	    else {
