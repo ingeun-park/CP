@@ -16,9 +16,10 @@ public class PythonPrintListener extends MiniCBaseListener {
    @Override
    public void exitVar_decl(MiniCParser.Var_declContext ctx) {
       String str;
-      if (ctx.getChildCount() == 6 && ctx.getChild(2).getText().equals("[")) {// array일경우
+       if (ctx.getChildCount() == 6 && ctx.getChild(2).getText().equals("[")) {// array일경우
     	  //System.out.println(ctx.getText()+ctx.getChildCount());
-    	  str = ctx.IDENT().getText() + "=" + ctx.getChild(2) + ctx.getChild(4);
+    	  str = ctx.IDENT().getText() + "=" + "np.zeros" + "(" + ctx.getChild(3).getText() + ")";
+    	  //str = ctx.IDENT().getText() + "=" + ctx.getChild(2) + ctx.getChild(4);
       }
       else if  (ctx.getChildCount() == 5 && ctx.getChild(2).getText().equals("=")) {// =일경우
          str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
@@ -43,7 +44,7 @@ public class PythonPrintListener extends MiniCBaseListener {
       nextTexts.put(ctx, str);
    }
 	
-	//funprolog 추가 
+	//funprolog 추가 -
 	@Override
 	public void exitProgram(MiniCParser.ProgramContext ctx) {
 		String s1, s2 = "";
@@ -208,7 +209,7 @@ public class PythonPrintListener extends MiniCBaseListener {
    	   } else { // 변수 초기화 (ctx.getchildcount() == 5)
     	    
      	    if(ctx.getChildCount() == 6){
-    	        s2 = ctx.IDENT().getText() + "=" + ctx.getChild(2) + ctx.getChild(4);
+     	    	s2 = ctx.IDENT().getText() + "=" + "np.zeros" + "(" + ctx.getChild(3).getText() + ")";
             
    	      }
     	     else if(ctx.getChildCount() == 5){
