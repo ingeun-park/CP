@@ -276,7 +276,8 @@ public class PythonPrintListener extends MiniCBaseListener {
 		for (MiniCParser.ExprContext c : ctx.expr()) {
 			str = str + (nextTexts.get(c) + ", ");
 		}
-		str = str.substring(0, str.length() - 2);
+		if(str.length() >= 2) //인자가 없는 경우 고려
+			str = str.substring(0, str.length() - 2);
 		nextTexts.put(ctx, str);
 	}
 
