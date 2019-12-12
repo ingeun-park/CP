@@ -19,6 +19,7 @@ var_decl   :  type_spec IDENT ';'
 type_spec   : VOID            
       | INT      
       | DOUBLE
+      | CHAR
       | FLOAT ;
       
 fun_decl   : type_spec IDENT '(' params ')' compound_stmt ;
