@@ -306,7 +306,7 @@ public class PythonPrintListener extends MiniCBaseListener {
 			s1 = ctx.IDENT().getText();
 			s2 = nextTexts.get(ctx.expr(0));
 			op = ctx.getChild(1).getText();
-			nextTexts.put(ctx, s1 + " " + op + " " + s2);
+			nextTexts.put(ctx, s1 + op + s2);
 		}
 
 		else if (isFunction(ctx)) {
