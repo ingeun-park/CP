@@ -24,6 +24,11 @@ public class PythonPrintListener extends MiniCBaseListener {
          str = ctx.IDENT().getText() + " " + ctx.getChild(2).getText() + " "
                + ctx.LITERAL().getText();
       }
+	   else if (ctx.getChildCount() == 8 && ctx.getChild(0).getText().equals("char")) // 문자열
+		{
+			str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(6).getText();
+
+		}
       else {// 전역 배열을 초기화시킬 때 
          //str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4)+"\n";
          str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2);
@@ -210,6 +215,11 @@ public class PythonPrintListener extends MiniCBaseListener {
         	 
       	      s2 = ctx.IDENT().getText() + ctx.getChild(2) + ctx.LITERAL().getText(); //+ ctx.getChild(4);
       	   }
+		     else if (ctx.getChildCount() == 8 && ctx.getChild(0).getText().equals("char")) // 문자열
+		{
+			str = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(6).getText();
+
+		}
        	    else {
         	s2 = ctx.IDENT().getText() + ctx.getChild(5) + ctx.getChild(2) + ctx.getChild(7).getText() + ctx.getChild(4);
          }
