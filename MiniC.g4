@@ -12,7 +12,9 @@ decl      : var_decl
 var_decl   :  type_spec IDENT ';' 
       | type_spec IDENT '=' LITERAL ';'   
       | type_spec IDENT '[' LITERAL ']' ';'
-      | type_spec IDENT '[' LITERAL ']' '=' '{' args '}' ';'	;
+      | type_spec IDENT '[' LITERAL ']' '=' '{' args '}' ';'	
+      | type_spec IDENT '[' LITERAL ']' '='  expr  ';'
+      ;
       
 type_spec   : VOID            
       | INT            ;
@@ -55,7 +57,7 @@ local_decl   : type_spec IDENT ';'
       | type_spec IDENT '=' LITERAL ';'   
       | type_spec IDENT '[' LITERAL ']' ';'
       | type_spec IDENT '[' LITERAL ']' '=' '{' args '}' ';'
-         ;
+      | type_spec IDENT '[' LITERAL ']' '='  expr  ';'  ;
       
 if_stmt      : IF '(' expr ')' stmt      
       | IF '(' expr ')' stmt ELSE stmt       ;
@@ -65,6 +67,7 @@ return_stmt   : RETURN ';'
       
 expr   :  
    LITERAL      
+   | STRING
    | '(' expr ')'             
    | IDENT             
    | IDENT '[' expr ']'          
@@ -96,7 +99,7 @@ args   : expr (',' expr)*
 
 VOID: 'void';
 INT: 'int';
-
+CHAR: 'char';
 WHILE: 'while';
 FOR: 'for';
 IF: 'if';
@@ -114,6 +117,12 @@ IDENT  : [a-zA-Z_]
         |  [0-9]
         )*;
 
+STRING : '"' 
+        (   [a-zA-Z_]
+        |  [0-9]
+        | ' '
+        )*
+        '"';
 
 LITERAL:   DecimalConstant     |   OctalConstant     |   HexadecimalConstant     ;
 
