@@ -228,22 +228,32 @@ public class PythonPrintListener extends MiniCBaseListener {
       }
    }
 
-	// if 문 뒤에 : 추가
 	@Override
 	public void exitIf_stmt(MiniCParser.If_stmtContext ctx) {
 		String e1, s1;
 		e1 = ctx.getChild(0).getText() + " " + ctx.getChild(1).getText() + nextTexts.get(ctx.expr())
-				+ ctx.getChild(3).getText() + ":"+ "\n";
+				+ ctx.getChild(3).getText() + ":" + "\n";
 		s1 = nextTexts.get(ctx.stmt(0));
-
+		System.out.println(nextTexts.get(ctx.getChild(6)));
 		String[] indentedStmt;
 		String newStmt = "";
 		String indent = "    ";
 		indentedStmt = s1.split("\n");
-
+		String el = ctx.getChild(5).getText();
+		
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			System.out.println(i + " " + ctx.getChild(i).getText());
+		}
 		if (ctx.stmt(0).compound_stmt() != null) {
 			for (String anIndentedStmt : indentedStmt)
 				newStmt = newStmt + (anIndentedStmt + "\n");
+			if(el.equals("else")) {
+				String s2 =nextTexts.get(ctx.getChild(6));
+				indentedStmt = s2.split("\n");
+				newStmt += el+"\n";
+				for (String anIndentedStmt : indentedStmt)
+					newStmt = newStmt + (anIndentedStmt + "\n");
+			}
 		} else {
 			newStmt = newStmt + "\n";
 			for (String anIndentedStmt : indentedStmt)
