@@ -1,0 +1,73 @@
+int max = 5000;
+char cg[5] = "abcde";
+
+int sumN(int x, int y){
+	int sum = 0;
+	int z;
+	z = x;
+	while(z <= y){
+		sum =sum+z;
+		++z;
+	}
+	_print("while test");
+	_print(sum);
+	int sum2 = 0;
+	for(int i = 0; i <= y ; ++i){
+		sum2 = sum2 + i;
+	}
+	_print("for test");
+	_print(sum2);
+}
+
+int twoFor(){
+	int a[100];
+	int sum = 0;
+	for(int i = 0; i< 100; ++i){
+		for(int j = 0; j < 100; j++){
+			sum = sum + j;
+			a[i] = j;
+		}
+	}
+	_print(sum);
+	_print("for double Test fin");
+	return sum;
+}
+
+void arrayAndTypeTest(){
+	double a;
+	a=11.115;
+	char cgg[6] = "abcde";
+	_print(cgg);
+	_print("abcde");
+	double aaa[5] ;
+	for(int i = 0; i< 5; ++i){
+		aaa[i]=1.5;
+	}
+	float bbb[5];
+	for(int i = 0; i< 5; ++i){
+		bbb[i]=0.0;
+	}
+	_print("ArrayTest fin");
+	
+}
+
+
+void main(){
+	int a;
+	a = 0;
+	int b = 100;
+
+	sumN(a, b);
+	twoFor();
+	arrayAndTypeTest();
+
+	if( a == 0 ){
+		if( b == 100){
+			_print("aaaa");
+		}
+	}
+	else {
+		a = 5;
+		b = 7;
+	}
+}
